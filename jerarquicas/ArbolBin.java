@@ -35,6 +35,35 @@ public class ArbolBin {
         return exito;
     }
 
+    public boolean insertarPorPosicion(Object elemNuevo, int posPadre, char posHijo){
+        boolean exito = false;
+        NodoArbol[] nodoPadre = {null};
+        int[] posActual = {0};
+        localizarPreorden(this.raiz, nodoPadre, posActual, posPadre);
+        if (nodoPadre[0] != null) {
+            if(nodoPadre[0].getIzquierdo() == null && posHijo == 'I'){
+                nodoPadre[0].setIzquierdo(new NodoArbol(elemNuevo, null, null));
+                exito = true;
+            }else if(nodoPadre[0].getDerecho() == null && posHijo == 'D'){
+                nodoPadre[0].setDerecho(new NodoArbol(elemNuevo, null, null));
+                exito = true;
+            }
+        }
+        return exito;
+    }
+    private void localizarPreorden(NodoArbol nodo, NodoArbol[] nodoPadre, int[] posActual, int posPadre){
+        if(nodo != null){
+            posActual[0]++;
+            if(posPadre == posActual[0]){
+                nodoPadre[0] = nodo;
+            }
+            if(nodoPadre[0] == null){
+                localizarPreorden(nodo.getIzquierdo(), nodoPadre, posActual, posPadre);
+                localizarPreorden(nodo.getDerecho(), nodoPadre, posActual, posPadre);
+            }
+        }
+    }
+
     private NodoArbol obtenerNodo(NodoArbol nodo, Object buscado) {
         //metodo PRIVADO que busca un elemento y devuelve el nodo que
         //lo contiene. Si no se encuentra buscado devuelve null
