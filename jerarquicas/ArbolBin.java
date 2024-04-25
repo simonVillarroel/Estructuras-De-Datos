@@ -35,29 +35,30 @@ public class ArbolBin {
         return exito;
     }
 
-    public boolean insertarPorPosicion(Object elemNuevo, int posPadre, char posHijo){
+    public boolean insertarPorPosicion(Object elemNuevo, int posPadre, char posHijo) {
         boolean exito = false;
         NodoArbol[] nodoPadre = {null};
         int[] posActual = {0};
         localizarPreorden(this.raiz, nodoPadre, posActual, posPadre);
         if (nodoPadre[0] != null) {
-            if(nodoPadre[0].getIzquierdo() == null && posHijo == 'I'){
+            if (nodoPadre[0].getIzquierdo() == null && posHijo == 'I') {
                 nodoPadre[0].setIzquierdo(new NodoArbol(elemNuevo, null, null));
                 exito = true;
-            }else if(nodoPadre[0].getDerecho() == null && posHijo == 'D'){
+            } else if (nodoPadre[0].getDerecho() == null && posHijo == 'D') {
                 nodoPadre[0].setDerecho(new NodoArbol(elemNuevo, null, null));
                 exito = true;
             }
         }
         return exito;
     }
-    private void localizarPreorden(NodoArbol nodo, NodoArbol[] nodoPadre, int[] posActual, int posPadre){
-        if(nodo != null){
+
+    private void localizarPreorden(NodoArbol nodo, NodoArbol[] nodoPadre, int[] posActual, int posPadre) {
+        if (nodo != null) {
             posActual[0]++;
-            if(posPadre == posActual[0]){
+            if (posPadre == posActual[0]) {
                 nodoPadre[0] = nodo;
             }
-            if(nodoPadre[0] == null){
+            if (nodoPadre[0] == null) {
                 localizarPreorden(nodo.getIzquierdo(), nodoPadre, posActual, posPadre);
                 localizarPreorden(nodo.getDerecho(), nodoPadre, posActual, posPadre);
             }
@@ -107,24 +108,25 @@ public class ArbolBin {
             alturaAux(nodo.getDerecho(), alturaMax, alturaActual + 1);
         }
     }
-    
-    public int nivel(Object buscado){
+
+    public int nivel(Object buscado) {
         int[] nivel = {-1};
         boolean[] encontrado = {false};
-        if(this.raiz != null){
+        if (this.raiz != null) {
             nivelAux(this.raiz, buscado, nivel, 0, encontrado);
         }
         return nivel[0];
     }
-    private void nivelAux(NodoArbol nodo, Object buscado, int[] nivel, int nivelActual, boolean[] encontrado){
-        if(nodo != null && !encontrado[0]){
-            if(nodo.getElem().equals(buscado)){
+
+    private void nivelAux(NodoArbol nodo, Object buscado, int[] nivel, int nivelActual, boolean[] encontrado) {
+        if (nodo != null && !encontrado[0]) {
+            if (nodo.getElem().equals(buscado)) {
                 nivel[0] = nivelActual;
                 encontrado[0] = true;
-            }else{
-                nivelAux(nodo.getIzquierdo(), buscado, nivel, nivelActual+1, encontrado);
-                if(!encontrado[0]){
-                    nivelAux(nodo.getDerecho(), buscado, nivel, nivelActual+1, encontrado);
+            } else {
+                nivelAux(nodo.getIzquierdo(), buscado, nivel, nivelActual + 1, encontrado);
+                if (!encontrado[0]) {
+                    nivelAux(nodo.getDerecho(), buscado, nivel, nivelActual + 1, encontrado);
                 }
             }
         }
@@ -216,6 +218,72 @@ public class ArbolBin {
             }
         }
         return lista;
+    }
+
+    public Lista frontera() {
+        Lista frontera = new Lista();
+        NodoArbol nodoAux = this.raiz;
+        if (nodoAux != null) {
+            fronteraAux(nodoAux, frontera);
+        }
+        return frontera;
+    }
+
+    private void fronteraAux(NodoArbol nodo, Lista frontera) {
+        //Recorrre el arbol y agrega a la lista frontera solo los nodos que tienen 0 hijos
+        if (nodo != null) {
+            if (nodo.getIzquierdo() == null && nodo.getDerecho() == null) {
+                frontera.insertar(nodo.getElem(), frontera.longitud() + 1);
+            }
+            fronteraAux(nodo.getIzquierdo(), frontera);
+            fronteraAux(nodo.getDerecho(), frontera);
+        }
+    }
+
+    public Lista obtenerAncestros(Object elem) {
+        Lista ancestros = new Lista();
+        NodoArbol nodoAux = this.raiz;
+        boolean[] encontrado = {false};
+        if (nodoAux != null) {
+            ancestrosAux(nodoAux, ancestros, elem, encontrado);
+        }
+        return ancestros;
+    }
+
+    private void ancestrosAux(NodoArbol nodo, Lista ancestros, Object buscado, boolean[] encontrado) {
+        if (nodo != null) {
+            if (!encontrado[0]) {
+                if (nodo.getElem().equals(buscado)) {
+                    encontrado[0] = true;
+                } else {
+                    ancestrosAux(nodo.getIzquierdo(), ancestros, buscado, encontrado);
+                    ancestrosAux(nodo.getDerecho(), ancestros, buscado, encontrado);
+                    if(encontrado[0]){
+                        ancestros.insertar(nodo.getElem(), ancestros.longitud() + 1);
+                    }
+                }
+            }
+            
+        }
+    }
+
+    public ArbolBin clone() {
+        ArbolBin clon = new ArbolBin();
+        NodoArbol nodoAux = this.raiz;
+        if (nodoAux != null) {
+            clon.raiz = cloneAux(nodoAux);
+        }
+        return clon;
+    }
+
+    private NodoArbol cloneAux(NodoArbol nodo) {
+        NodoArbol nodoClon = null;
+        if (nodo != null) {
+            nodoClon = new NodoArbol(nodo.getElem(), null, null);
+            nodoClon.setIzquierdo(cloneAux(nodo.getIzquierdo()));
+            nodoClon.setDerecho(cloneAux(nodo.getDerecho()));
+        }
+        return nodoClon;
     }
 
     public void vaciar() {
