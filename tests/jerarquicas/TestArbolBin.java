@@ -8,6 +8,8 @@ public class TestArbolBin {
 
     public static void main(String[] args) {
         ArbolBin arbol = new ArbolBin();
+        ArbolBin clon = new ArbolBin();
+
         System.out.println("Se crea un arbol generico de altura 2 con 7 elementos: ");
         System.out.println("\n      _1_\n    _|   |_\n  _2_     _3_\n |   |   |   |\n 4   5   6   7\n");
         
@@ -29,6 +31,16 @@ public class TestArbolBin {
         System.out.println("Busco al padre del elemento 5, deberia dar 2:\t\t\t--> " + arbol.padre(5));
         System.out.println("Busco al padre del elemento 6, deberia dar 3:\t\t\t--> " + arbol.padre(6));
         System.out.println("Busco al padre del elemento 7, deberia dar 3:\t\t\t--> " + arbol.padre(7));
+        System.out.println("\n");
+        
+        System.out.println("*****Primera prueba de metodo frontera*****");
+        System.out.println("Frontera del arbol, debe dar [ 4 5 6 7 ]: \t\t\t--> "+ arbol.frontera() + "\n");
+        
+        System.out.println("*****Primera prueba de metodo obtenerAncestros*****");
+        System.out.println("Ancestros de nodo con elem = 7, debe dar [ 1 3 ]: \t\t\t--> "+ arbol.obtenerAncestros(7));
+        System.out.println("Ancestros de nodo con elem = 2, debe dar [ 1 ]: \t\t\t--> "+ arbol.obtenerAncestros(2));
+        System.out.println("Ancestros de nodo con elem = 1, debe dar [ ]: \t\t\t--> "+ arbol.obtenerAncestros(1) + "\n");
+
 
         System.out.println("*****Prueba del metodo insertar*****");
         System.out.println("Inserto a 8 como HI de 0, espera FALSE y [ 1 2 4 5 3 6 7]:\t--> " + (arbol.insertar(8, 0, 'I') ? sOk : sErr) + " " + arbol.listarPreorden().toString());
@@ -37,7 +49,8 @@ public class TestArbolBin {
         System.out.println("Inserto a 9 como HI de 8, espera TRUE y [ 1 2 4 5 8 9 3 6 7]:\t--> " + (arbol.insertar(9, 8, 'I') ? sOk : sErr) + " " + arbol.listarPreorden().toString());
         System.out.println("Inserto a 1 como HI de 7, espera TRUE y [ 1 2 4 5 8 9 3 6 7 1]:\t--> " + (arbol.insertar(1, 7, 'I') ? sOk : sErr) + " " + arbol.listarPreorden().toString());
         System.out.println("\n" + arbol.toString());
-        System.out.println("Altura del arbol: " + arbol.altura());
+        System.out.println("Altura del arbol: " + arbol.altura() + "\n");
+        
         
         System.out.println("*****Prueba de nivel*****");
         System.out.println("Nivel del elemento 1, deberia dar 0:\t\t--> " + arbol.nivel(1));
@@ -47,13 +60,45 @@ public class TestArbolBin {
         System.out.println("Nivel del elemento 9, deberia dar 4:\t\t--> " + arbol.nivel(9));
         System.out.println("Nivel del elemento 20, deberia dar -1:\t\t--> " + arbol.nivel(20));
         System.out.println("\n" + arbol.toString());
-
+        
+        
+        System.out.println("*****Segunda prueba de metodo frontera*****");
+        System.out.println("Frontera del arbol, debe dar [ 4 9 6 1 ]: \t\t\t--> "+ arbol.frontera() + "\n");
+        
+        System.out.println("*****Segunda prueba de metodo obtenerAncestros*****");
+        System.out.println("Ancestros de nodo con elem = 8, debe dar [ 1 2 5 ]: \t\t\t--> "+ arbol.obtenerAncestros(8));
+        System.out.println("Ancestros de nodo con elem = 9, debe dar [ 1 2 5 8 ]: \t\t\t--> "+ arbol.obtenerAncestros(9));
+        System.out.println("Ancestros de nodo con elem = 6, debe dar [ 1 3 ]: \t\t\t--> "+ arbol.obtenerAncestros(6) + "\n");
+        
+        
         System.out.println("*****Prueba de insercion por posicion*****");
         System.out.println("Inserto a 4 como HI de 6 (pos 8), espera TRUE y [ 1 2 4 5 8 9 3 6 4 7 1]:\t--> " + (arbol.insertarPorPosicion(4, 8, 'I') ? sOk : sErr) + " " + arbol.listarPreorden().toString());
         System.out.println("Inserto a 2 como HD de 5 (pos 4), espera FALSE y [ 1 2 4 5 8 9 3 6 4 7 1]:\t--> " + (arbol.insertarPorPosicion(2, 4, 'D') ? sOk : sErr) + " " + arbol.listarPreorden().toString());
         System.out.println("Inserto a 3 como HI de 1 (pos 1), espera FALSE y [ 1 2 4 5 8 9 3 6 4 7 1]:\t--> " + (arbol.insertarPorPosicion(3, 1, 'I') ? sOk : sErr) + " " + arbol.listarPreorden().toString());
         System.out.println("Inserto a 2 como HD de 1 (pos 11), espera TRUE y [ 1 2 4 5 8 9 3 6 4 7 1 2]:\t--> " + (arbol.insertarPorPosicion(2, 11, 'D') ? sOk : sErr) + " " + arbol.listarPreorden().toString());
         System.out.println("\n" + arbol.toString());
+        
+        System.out.println("*****Prueba de metodo clone*****");
+        System.out.println("Arbol original esta vacio: " + arbol.esVacio());
+        System.out.println("Vacio el arbol original");
+        arbol.vaciar();
+        System.out.println("Arbol original esta vacio: " + arbol.esVacio());
+        System.out.println("Armo el arbol original generico");
+        armarArbolGenerico(arbol);
+        System.out.println("Clono el arbol");
+        clon = arbol.clone();
+        System.out.println("\nArbol original:\n" + arbol.toString());
+        System.out.println("\nArbol clon:\n" + clon.toString());
+        System.out.println("Inserto a 8 como HD de 5, espera TRUE y [ 1 2 4 5 8 3 6 7]:\t--> " + (arbol.insertar(8, 5, 'D') ? sOk : sErr) + " " + arbol.listarPreorden().toString());
+        System.out.println("Inserto a 9 como HI de 6, espera TRUE y [ 1 2 4 5 8 3 6 9 7]:\t--> " + (arbol.insertar(9, 6, 'I') ? sOk : sErr) + " " + arbol.listarPreorden().toString());
+        System.out.println("");
+        System.out.println("\nArbol original:\n" + arbol.toString());
+        System.out.println("\nArbol clon:\n" + clon.toString());
+        System.out.println("Vacio el arbol original");
+        arbol.vaciar();
+        System.out.println("\nArbol original:\n" + arbol.toString());
+        System.out.println("\nArbol clon:\n" + clon.toString());
+        
     }
 
     public static void armarArbolGenerico(ArbolBin arbol){
