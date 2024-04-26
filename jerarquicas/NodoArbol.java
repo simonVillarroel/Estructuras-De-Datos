@@ -10,7 +10,6 @@ public class NodoArbol {
         this.izquierdo = hijoI;
         this.derecho = hijoD;
     }
-    
 
     public Object getElem() {
         return elem;
@@ -35,5 +34,6 @@ public class NodoArbol {
     public void setDerecho(NodoArbol derecho) {
         this.derecho = derecho;
     }
+
     
 }

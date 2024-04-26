@@ -267,6 +267,23 @@ public class ArbolBin {
         }
     }
 
+    public Lista obtenerDescendientes(Object elem) {
+        Lista descendientes = new Lista();
+        NodoArbol nodoAux = obtenerNodo(this.raiz, elem);
+        if (nodoAux != null) {
+            listarDescendientes(nodoAux.getIzquierdo(), descendientes);
+            listarDescendientes(nodoAux.getDerecho(), descendientes);
+        }
+        return descendientes;
+    }
+    private void listarDescendientes(NodoArbol nodo, Lista descendientes) {
+        if (nodo != null) {    
+            descendientes.insertar(nodo.getElem(), descendientes.longitud() + 1);
+            listarDescendientes(nodo.getIzquierdo(), descendientes);
+            listarDescendientes(nodo.getDerecho(), descendientes);
+        }
+    }
+
     public ArbolBin clone() {
         ArbolBin clon = new ArbolBin();
         NodoArbol nodoAux = this.raiz;
