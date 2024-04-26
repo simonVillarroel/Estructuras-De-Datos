@@ -39,15 +39,19 @@ public class TestArbolBin {
         System.out.println("*****Primera prueba de metodo obtenerAncestros*****");
         System.out.println("Ancestros de nodo con elem = 7, debe dar [ 1 3 ]: \t\t\t--> "+ arbol.obtenerAncestros(7));
         System.out.println("Ancestros de nodo con elem = 2, debe dar [ 1 ]: \t\t\t--> "+ arbol.obtenerAncestros(2));
-        System.out.println("Ancestros de nodo con elem = 1, debe dar [ ]: \t\t\t--> "+ arbol.obtenerAncestros(1) + "\n");
+        System.out.println("Ancestros de nodo con elem = 1, debe dar [ ]: \t\t\t\t--> "+ arbol.obtenerAncestros(1) + "\n");
 
+        System.out.println("*****Primera prueba de metodo obtenerDescendientes*****");
+        System.out.println("Descendientes de nodo con elem = 5, debe dar [ ]: \t\t\t--> "+ arbol.obtenerDescendientes(5));
+        System.out.println("Descendientes de nodo con elem = 3, debe dar [ 6 7 ]: \t\t\t--> "+ arbol.obtenerDescendientes(3));
+        System.out.println("Descendientes de nodo con elem = 1, debe dar [ 2 4 5 3 6 7 ]: \t\t--> "+ arbol.obtenerDescendientes(1) + "\n");
 
         System.out.println("*****Prueba del metodo insertar*****");
-        System.out.println("Inserto a 8 como HI de 0, espera FALSE y [ 1 2 4 5 3 6 7]:\t--> " + (arbol.insertar(8, 0, 'I') ? sOk : sErr) + " " + arbol.listarPreorden().toString());
-        System.out.println("Inserto a 1 como HD de 2, espera FALSE y [ 1 2 4 5 3 6 7]:\t--> " + (arbol.insertar(1, 2, 'D') ? sOk : sErr) + " " + arbol.listarPreorden().toString());
-        System.out.println("Inserto a 8 como HD de 5, espera TRUE y [ 1 2 4 5 8 3 6 7]:\t--> " + (arbol.insertar(8, 5, 'D') ? sOk : sErr) + " " + arbol.listarPreorden().toString());
-        System.out.println("Inserto a 9 como HI de 8, espera TRUE y [ 1 2 4 5 8 9 3 6 7]:\t--> " + (arbol.insertar(9, 8, 'I') ? sOk : sErr) + " " + arbol.listarPreorden().toString());
-        System.out.println("Inserto a 1 como HI de 7, espera TRUE y [ 1 2 4 5 8 9 3 6 7 1]:\t--> " + (arbol.insertar(1, 7, 'I') ? sOk : sErr) + " " + arbol.listarPreorden().toString());
+        System.out.println("Inserto a 8 como HI de 0, espera FALSE y [ 1 2 4 5 3 6 7]:\t\t--> " + (arbol.insertar(8, 0, 'I') ? sOk : sErr) + " " + arbol.listarPreorden().toString());
+        System.out.println("Inserto a 1 como HD de 2, espera FALSE y [ 1 2 4 5 3 6 7]:\t\t--> " + (arbol.insertar(1, 2, 'D') ? sOk : sErr) + " " + arbol.listarPreorden().toString());
+        System.out.println("Inserto a 8 como HD de 5, espera TRUE y [ 1 2 4 5 8 3 6 7]:\t\t--> " + (arbol.insertar(8, 5, 'D') ? sOk : sErr) + " " + arbol.listarPreorden().toString());
+        System.out.println("Inserto a 9 como HI de 8, espera TRUE y [ 1 2 4 5 8 9 3 6 7]:\t\t--> " + (arbol.insertar(9, 8, 'I') ? sOk : sErr) + " " + arbol.listarPreorden().toString());
+        System.out.println("Inserto a 1 como HI de 7, espera TRUE y [ 1 2 4 5 8 9 3 6 7 1]:\t\t--> " + (arbol.insertar(1, 7, 'I') ? sOk : sErr) + " " + arbol.listarPreorden().toString());
         System.out.println("\n" + arbol.toString());
         System.out.println("Altura del arbol: " + arbol.altura() + "\n");
         
@@ -70,6 +74,11 @@ public class TestArbolBin {
         System.out.println("Ancestros de nodo con elem = 9, debe dar [ 1 2 5 8 ]: \t\t\t--> "+ arbol.obtenerAncestros(9));
         System.out.println("Ancestros de nodo con elem = 6, debe dar [ 1 3 ]: \t\t\t--> "+ arbol.obtenerAncestros(6) + "\n");
         
+        System.out.println("*****Segunda prueba de metodo obtenerDescendientes*****");
+        System.out.println("Descendientes de nodo con elem = 5, debe dar [ 8 9 ]: \t\t\t\t--> "+ arbol.obtenerDescendientes(5));
+        System.out.println("Descendientes de nodo con elem = 3, debe dar [ 6 4 7 1 ]: \t\t\t--> "+ arbol.obtenerDescendientes(3));
+        System.out.println("Descendientes de nodo con elem = 1, debe dar [ 2 4 5 8 9 3 6 4 7 1 ]: \t\t--> "+ arbol.obtenerDescendientes(1) + "\n");
+
         
         System.out.println("*****Prueba de insercion por posicion*****");
         System.out.println("Inserto a 4 como HI de 6 (pos 8), espera TRUE y [ 1 2 4 5 8 9 3 6 4 7 1]:\t--> " + (arbol.insertarPorPosicion(4, 8, 'I') ? sOk : sErr) + " " + arbol.listarPreorden().toString());
