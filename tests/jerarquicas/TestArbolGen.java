@@ -7,6 +7,7 @@ public class TestArbolGen {
 
     public static void main(String[] args){
         ArbolGen arbol = new ArbolGen();
+        ArbolGen clon = new ArbolGen();
         //ARBOL
         //       ______ a ______
         //      /       |       \
@@ -83,7 +84,17 @@ public class TestArbolGen {
         
         System.out.println(arbol.toString());
         System.out.print("\n");
+        System.out.println("*****Prueba de clone()*****");
+        System.out.println("Clon esta vacio: " + clon.esVacio());
+        System.out.println("Clono el arbol");
+        clon = arbol.clone();
+        System.out.println(clon.toString());
+        System.out.println("Clon esta vacio: " + clon.esVacio());
+        System.out.println("Vacio al clon");
+        clon.vaciar();
+        System.out.println("Clon esta vacio: " + clon.esVacio());
 
+        
         System.out.println("*****Prueba de listados*****");
         System.out.println("Arbol listado en preorden, deberia dar [ a b e f g c h d i j k l ]: " + arbol.listarPreorden());
         System.out.println("Arbol listado en inorden, deberia dar [ e b f g a h c i d j l k ]: " + arbol.listarInorden());
