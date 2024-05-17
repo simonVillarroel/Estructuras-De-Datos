@@ -1,6 +1,7 @@
 package jerarquicas;
 
 import lineales.dinamicas.Lista;
+import lineales.dinamicas.Cola;
 
 public class ArbolGen {
 
@@ -217,6 +218,31 @@ public class ArbolGen {
         }
     }
 
+    public ArbolGen clone(){
+        ArbolGen clon = new ArbolGen();
+        clon.raiz = cloneAux(this.raiz);
+        return clon;
+    }
+    private NodoGen cloneAux(NodoGen nodo){
+        NodoGen aux = null;
+        if(nodo != null){
+            aux = new NodoGen(nodo.getElem(), null, null);
+            NodoGen hijo = nodo.getHijoIzquierdo();
+            if(hijo != null){
+                aux.setHijoIzquierdo(cloneAux(hijo));
+                hijo = hijo.getHermanoDerecho();
+                NodoGen aux2 = aux.getHijoIzquierdo();
+                while(hijo != null && aux2 != null){
+                    aux2.setHermanoDerecho(cloneAux(hijo));
+                    hijo = hijo.getHermanoDerecho();
+                    aux2 = aux2.getHermanoDerecho();
+                }
+                
+            }
+        }
+        return aux;
+    }
+    
     public String toString() {
         String cadena = "(Arbol vacio)";
         if (this.raiz != null) {
