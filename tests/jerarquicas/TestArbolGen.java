@@ -99,8 +99,31 @@ public class TestArbolGen {
         System.out.println("Arbol listado en preorden, deberia dar [ a b e f g c h d i j k l ]: " + arbol.listarPreorden());
         System.out.println("Arbol listado en inorden, deberia dar [ e b f g a h c i d j l k ]: " + arbol.listarInorden());
         System.out.println("Arbol listado en posorden, deberia dar [ e f g b h c i j l k d a ]: " + arbol.listarPosorden());
-        //System.out.println("Arbol listado por niveles, deberia dar [ a b c d e f g h i j k l ]: " + arbol.listarNiveles());
+        System.out.println("Arbol listado por niveles, deberia dar [ a b c d e f g h i j k l ]: " + arbol.listarNiveles());
         System.out.print("\n");
-    
+        
+        System.out.println("*****Prueba de insertarPorPosicion()*****");
+        System.out.println("Arbol listado en preorden: " + arbol.listarPreorden());
+        System.out.println("Inserto t en pos 17 (hijo de l), devuelve ERROR: "+ (arbol.insertarPorPosicion('s', 17) ? sOk : sErr));
+        System.out.println("Arbol listado en preorden: " + arbol.listarPreorden());
+        System.out.println("Inserto m en pos 1 (hijo de a)), devuelve OK!: "+ (arbol.insertarPorPosicion('m', 1) ? sOk : sErr));
+        System.out.println("Arbol listado en preorden: " + arbol.listarPreorden());
+        System.out.println("Inserto n en pos 2 (hijo de m), devuelve OK!: "+ (arbol.insertarPorPosicion('n', 2) ? sOk : sErr));
+        System.out.println("Arbol listado en preorden: " + arbol.listarPreorden());
+        System.out.println("Inserto o en pos 3 (hijo de n), devuelve OK!: "+ (arbol.insertarPorPosicion('o', 3) ? sOk : sErr));
+        System.out.println("Arbol listado en preorden: " + arbol.listarPreorden());
+        System.out.println("Inserto p en pos 7 (hijo de f), devuelve OK!: "+ (arbol.insertarPorPosicion('p', 7) ? sOk : sErr));
+        System.out.println("Arbol listado en preorden: " + arbol.listarPreorden());
+        System.out.println("Inserto q en pos 12 (hijo de d), devuelve OK!: "+ (arbol.insertarPorPosicion('q', 12) ? sOk : sErr));
+        System.out.println("Arbol listado en preorden: " + arbol.listarPreorden());
+        System.out.println("Inserto r en pos 0, devuelve ERROR: "+ (arbol.insertarPorPosicion('r', 0) ? sOk : sErr));
+        System.out.println("Arbol listado en preorden: " + arbol.listarPreorden());
+        System.out.println("Inserto s en pos 30, devuelve ERROR: "+ (arbol.insertarPorPosicion('s', 30) ? sOk : sErr));
+        System.out.println("Arbol listado en preorden: " + arbol.listarPreorden());
+        System.out.println("Inserto t en pos 17 (hijo de l), devuelve OK!: "+ (arbol.insertarPorPosicion('t', 17) ? sOk : sErr));
+        System.out.println("Arbol listado en preorden: " + arbol.listarPreorden());
+        System.out.println(arbol.toString());
+        System.out.print("\n");
+        
     }
 }
