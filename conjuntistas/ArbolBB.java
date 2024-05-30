@@ -35,7 +35,7 @@ public class ArbolBB {
     }
     
     public boolean insertar(Comparable elem){
-        boolean exito = false;
+        boolean exito = true;
         if(this.raiz == null){
             this.raiz = new NodoABB(elem);
         }else{
@@ -71,8 +71,8 @@ public class ArbolBB {
     }
 
     public boolean eliminar(Comparable elem){
-        boolean exito;
-        exito = eliminarAux(this.raiz, null, elem);
+        boolean exito = true;
+        exito = eliminarAux(this.raiz, null, elem);            
         return exito;
     }
 
@@ -106,12 +106,16 @@ public class ArbolBB {
     }
 
     private void eliminarCaso1(NodoABB nodoActual, NodoABB nodoPadre){
-        if(nodoActual.getElem().compareTo(nodoPadre.getElem()) < 0){
-            //el nodo a eliminar es HI de nodoPadre
-            nodoPadre.setIzquierdo(null);
+        if(nodoActual == this.raiz){
+            this.raiz = null;
         }else{
-            //el nodo a eliminar es HD de nodoPadre
-            nodoPadre.setDerecho(null);
+            if(nodoActual.getElem().compareTo(nodoPadre.getElem()) < 0){
+                //el nodo a eliminar es HI de nodoPadre
+                nodoPadre.setIzquierdo(null);
+            }else{
+                //el nodo a eliminar es HD de nodoPadre
+                nodoPadre.setDerecho(null);
+            }
         }
     }
 
@@ -138,8 +142,11 @@ public class ArbolBB {
     }
 
     private void eliminarCaso3(NodoABB nodoActual, NodoABB nodoPadre){
-        nodoActual.setElem(mejorCandidatoA(nodoActual, nodoPadre));
-        //nodoActual.setElem(mejorCandidatoB(nodoActual, nodoPadre));
+        if(nodoActual.getIzquierdo() != null){
+            nodoActual.setElem(mejorCandidatoA(nodoActual, nodoPadre));
+        }else{
+            nodoActual.setElem(mejorCandidatoB(nodoActual, nodoPadre));        
+        }
     }
 
     private Comparable mejorCandidatoA(NodoABB nodoActual, NodoABB nodoPadre){
@@ -152,6 +159,8 @@ public class ArbolBB {
             nodoActual = nodoActual.getDerecho();
         }
         candidato = nodoActual.getElem();
+        
+        
         if(nodoActual.getIzquierdo() != null){
             //el candidato tiene HI: se debe eliminar segun caso 2
             nodoPadre.setDerecho(nodoActual.getIzquierdo());
@@ -231,14 +240,19 @@ public class ArbolBB {
 
     private void listarRangoAux(NodoABB nodo, Lista lista, Comparable min, Comparable max){
         if(nodo != null){
+            System.out.println("entre con nodo " + nodo.getElem());
             int mayorQueMinimo = nodo.getElem().compareTo(min);
             int menorQueMaximo = nodo.getElem().compareTo(max);
+            
             listarRangoAux(nodo.getIzquierdo(), lista, min, max);
+            
             if(mayorQueMinimo >= 0 && menorQueMaximo <= 0){
                 //el elemento a insertar esta dentro de los limites o es igual a uno de estos
                 lista.insertar(nodo.getElem(), lista.longitud()+1);
             }
-            listarRangoAux(nodo.getDerecho(), lista, min, max);
+            if(nodo.getElem().compareTo(max) < 0){
+                listarRangoAux(nodo.getDerecho(), lista, min, max);
+            }
         }
     }
 
