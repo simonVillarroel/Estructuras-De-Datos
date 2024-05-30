@@ -9,7 +9,12 @@ public class TestArbolBB {
         ArbolBB arbol = new ArbolBB();
         ArbolBB clon;
         
-        System.out.println("Minimo elemento del arbol vacio debe devolver null -->\t" + arbol.minimoElem());
+        System.out.println("Inserto el nro 25: " + arbol.insertar(25));
+        System.out.println(arbol.toString());
+        System.out.println("Elimino al nro 25 (raiz, caso 1) -->\t" + (arbol.eliminar(25) ? sOk : sErr));
+        System.out.println(arbol.toString());
+        
+        System.out.println("\nMinimo elemento del arbol vacio debe devolver null -->\t" + arbol.minimoElem());
         System.out.println("Maximo elemento del arbol vacio debe devolver null -->\t" + arbol.maximoElem());
         System.out.println("Inserto el nro 25: " + arbol.insertar(25));
         System.out.println("Minimo elemento del arbol debe devolver 25 -->\t" + arbol.minimoElem());
@@ -67,6 +72,8 @@ public class TestArbolBB {
         System.out.println("Elimino al nro 30 (caso 2) -->\t" + (arbol.eliminar(30) ? sOk : sErr));
         System.out.println(arbol.toString());
         System.out.println("Listado del arbol original -->\t\t\t\t\t" + arbol.listar());
+        
+        System.out.println("\n*****Prueba de listarRango()*****");
         System.out.println("Listado del arbol entre 20 y 40, debe dar [22 28] -->\t\t" + arbol.listarRango(20, 40));
         System.out.println("Listado del arbol entre 0 y 35, debe dar [4 11 15 22 28] -->\t" + arbol.listarRango(0, 35));
         System.out.println("Listado del arbol entre 28 y 50, debe dar [28 43 50] -->\t" + arbol.listarRango(28, 50));
