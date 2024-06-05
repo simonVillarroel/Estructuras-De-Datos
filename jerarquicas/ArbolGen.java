@@ -326,4 +326,79 @@ public class ArbolGen {
         }
         return cadena;
     }
+
+    //////////EJERCICIOS ADICIONALES//////////
+
+    public Lista listarHastaNivel(int niv){
+        Lista lista = new Lista();
+        listarHastaNivelAux(this.raiz, niv, 0, lista);
+        return lista;
+    }
+    private void listarHastaNivelAux(NodoGen nodo, int niv, int nivelActual, Lista lista){
+        //flag para probar visitas a los nodos
+        //System.out.println(nodo.getElem());
+        if(nodo != null && nivelActual <= niv){
+            lista.insertar(nodo.getElem(), lista.longitud()+1);
+            nivelActual++;
+            if(nivelActual <= niv){
+                NodoGen hijo = nodo.getHijoIzquierdo();
+                while(hijo != null){
+                    listarHastaNivelAux(hijo, niv, nivelActual, lista);
+                    hijo = hijo.getHermanoDerecho();
+                }
+            }
+        }
+    }
+
+    public boolean verificarCamino(Lista l){
+        boolean exito = false;
+        if(this.raiz != null){
+            exito = verificarCaminoAux(this.raiz, 1, l.longitud(), l);
+        }
+        return exito;
+    }
+
+    private boolean verificarCaminoAux(NodoGen nodo, int posLista, int longitudLista, Lista lista){
+        boolean exito = false;
+        while(!exito && nodo != null){
+            if(nodo.getElem() == lista.recuperar(posLista)){
+                nodo = nodo.getHijoIzquierdo();
+                posLista++;
+                if(nodo == null && posLista > longitudLista){
+                    exito = true;
+                }else if(posLista <= lista.longitud()){
+                    exito = verificarCaminoAux(nodo, posLista, longitudLista, lista);
+                }
+            }else{
+                nodo = nodo.getHermanoDerecho();
+            }
+        }
+        return exito;
+    }
+
+    public boolean verificarCaminoHastaNodo(Lista l){
+        boolean exito = false;
+        if(this.raiz != null){
+            exito = verificarCaminoHastaNodoAux(this.raiz, 1, l.longitud(), l);
+        }
+        return exito;
+    }
+
+    private boolean verificarCaminoHastaNodoAux(NodoGen nodo, int posLista, int longitudLista, Lista lista){
+        boolean exito = false;
+        while(!exito && nodo != null){
+            if(nodo.getElem() == lista.recuperar(posLista)){
+                nodo = nodo.getHijoIzquierdo();
+                posLista++;
+                if(lista.recuperar(posLista) == null){
+                    exito = true;
+                }else{
+                    exito = verificarCaminoAux(nodo, posLista, longitudLista, lista);
+                }
+            }else{
+                nodo = nodo.getHermanoDerecho();
+            }
+        }
+        return exito;
+    }
 }
