@@ -1,6 +1,7 @@
 package tests.jerarquicas;
 
 import jerarquicas.ArbolGen;
+import lineales.dinamicas.Lista;
 
 public class TestArbolGen {
     static String sOk = "OK!", sErr = "ERROR";
@@ -8,6 +9,18 @@ public class TestArbolGen {
     public static void main(String[] args){
         ArbolGen arbol = new ArbolGen();
         ArbolGen clon = new ArbolGen();
+
+        Lista camino1 = new Lista();    camino1.insertar('a', 1);   camino1.insertar('b', 2);
+        camino1.insertar('f', 3);   camino1.insertar('p', 4);
+        Lista camino2 = new Lista();    camino2.insertar('a', 1);   camino2.insertar('d', 2);
+        camino2.insertar('k', 3);   camino2.insertar('l', 4);
+        camino2.insertar('t', 5);
+        Lista camino3 = new Lista();    camino3.insertar('a', 1);   camino3.insertar('m', 2);
+        camino3.insertar('n', 3);   camino3.insertar('o', 4);
+        camino3.insertar('t', 5);
+        Lista camino4 = new Lista();    camino4.insertar('a', 1);   camino4.insertar('m', 2);
+        camino4.insertar('n', 3);
+
         //ARBOL
         //       ______ a ______
         //      /       |       \
@@ -101,8 +114,13 @@ public class TestArbolGen {
         System.out.println("Arbol listado en posorden, deberia dar [ e f g b h c i j l k d a ]: " + arbol.listarPosorden());
         System.out.println("Arbol listado por niveles, deberia dar [ a b c d e f g h i j k l ]: " + arbol.listarNiveles());
         System.out.print("\n");
+        System.out.println("*****Prueba listarHastaNivel()*****");
+        System.out.println("Listar hasta nivel 0, debe dar [ a ] -->\t" + arbol.listarHastaNivel(0));
+        System.out.println("Listar hasta nivel 1, debe dar [ a b c d ] -->\t" + arbol.listarHastaNivel(1));
+        System.out.println("Listar hasta nivel 2, debe dar [ a b c d e f g h i j k ] -->\t" + arbol.listarHastaNivel(2));
+        System.out.println("Listar hasta nivel 3, debe dar [ a b c d e f g h i j k l ] -->\t" + arbol.listarHastaNivel(3));
         
-        System.out.println("*****Prueba de insertarPorPosicion()*****");
+        System.out.println("\n*****Prueba de insertarPorPosicion()*****");
         System.out.println("Arbol listado en preorden: " + arbol.listarPreorden());
         System.out.println("Inserto t en pos 17 (hijo de l), devuelve ERROR: "+ (arbol.insertarPorPosicion('s', 17) ? sOk : sErr));
         System.out.println("Arbol listado en preorden: " + arbol.listarPreorden());
@@ -124,6 +142,34 @@ public class TestArbolGen {
         System.out.println("Arbol listado en preorden: " + arbol.listarPreorden());
         System.out.println(arbol.toString());
         System.out.print("\n");
+        //ARBOL
+        //0    __________ a ___________
+        //    /       |       \        \
+        //1  m ---- _ b _ ---- c ---- _ d _
+        //   |     /  |  \     |     /  |  \
+        //2  n    e - f - g    h    i - j - k
+        //   |        |                     |
+        //3  o        p                     l
+        //                                  |
+        //4                                 t
         
+        System.out.println("*****Prueba verificarCamino()*****");
+        System.out.println("Verifico camino [ a b f p ], devuelve OK!: " + ((arbol.verificarCamino(camino1)) ? sOk : sErr));
+        System.out.println("Verifico camino [ a d k l t ], devuelve OK!: " + ((arbol.verificarCamino(camino2)) ? sOk : sErr));
+        System.out.println("Verifico camino [ a m n o t ], devuelve ERROR: " + ((arbol.verificarCamino(camino3)) ? sOk : sErr));
+        System.out.println("Verifico camino [ a m n ], devuelve ERROR: " + ((arbol.verificarCamino(camino4)) ? sOk : sErr));
+
+
+        camino1.vaciar();
+        camino1.insertar('a', 1);   camino1.insertar('b', 2);
+        camino1.insertar('f', 3);
+        camino3.vaciar();    camino3.insertar('a', 1);   camino3.insertar('m', 2);
+        camino3.insertar('n', 3);   camino3.insertar('o', 4);
+        camino4.vaciar();    camino4.insertar('a', 1);   camino4.insertar('d', 2);
+        System.out.println("\n*****Prueba verificarCaminoHastaNodo()*****");
+        System.out.println("Verifico camino [ a b f ], devuelve OK!: " + ((arbol.verificarCaminoHastaNodo(camino1)) ? sOk : sErr));
+        System.out.println("Verifico camino [ a d k l t ], devuelve OK!: " + ((arbol.verificarCaminoHastaNodo(camino2)) ? sOk : sErr));
+        System.out.println("Verifico camino [ a m n o t ], devuelve ERROR: " + ((arbol.verificarCaminoHastaNodo(camino3)) ? sOk : sErr));
+        System.out.println("Verifico camino [ a d ], devuelve OK!: " + ((arbol.verificarCaminoHastaNodo(camino4)) ? sOk : sErr));
     }
 }
