@@ -307,5 +307,46 @@ public class ArbolBB {
             cadena += toStringAux(nodo.getDerecho());
         }
         return cadena;
+
+    }
+
+    //////////EJERCICIOS ADICIONALES//////////
+
+    public Lista listarMayorIgual(Comparable elem){
+        Lista lista = new Lista();
+        listarMayorIgualAux(this.raiz, lista, elem);
+        return lista;
+    }
+
+    private void listarMayorIgualAux(NodoABB nodo, Lista lista, Comparable elem){
+        if(nodo != null){
+            if(nodo.getElem().compareTo(elem) >= 0){
+                //nodo.elem es mayor a elem
+                listarMayorIgualAux(nodo.getIzquierdo(), lista, elem);
+                lista.insertar(nodo.getElem(), lista.longitud()+1);
+                listarMayorIgualAux(nodo.getDerecho(), lista, elem);
+            }else{
+                listarMayorIgualAux(nodo.getDerecho(), lista, elem);
+            }
+        }
+    }
+
+    public Lista listarMenores(Comparable elem){
+        Lista lista = new Lista();
+        listarMenoresAux(this.raiz, lista, elem);
+        return lista;
+    }
+
+    private void listarMenoresAux(NodoABB nodo, Lista lista, Comparable elem){
+        if(nodo != null){
+            if(nodo.getElem().compareTo(elem) < 0){
+                //nodo.elem es mayor a elem
+                listarMenoresAux(nodo.getIzquierdo(), lista, elem);
+                lista.insertar(nodo.getElem(), lista.longitud()+1);
+                listarMenoresAux(nodo.getDerecho(), lista, elem);
+            }else{
+                listarMenoresAux(nodo.getIzquierdo(), lista, elem);
+            }
+        }
     }
 }
