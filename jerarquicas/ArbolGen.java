@@ -401,4 +401,26 @@ public class ArbolGen {
         }
         return exito;
     }
+
+    public Lista listarEntreNiveles(int nivMin, int nivMax){
+        Lista lista = new Lista();
+        listarEntreNivelesAux(this.raiz, 0, nivMin, nivMax, lista);
+        return lista;
+    }
+    
+    private void listarEntreNivelesAux(NodoGen nodo, int nivelActual, int nivMin, int nivMax, Lista lista){
+        if(nodo != null){
+            System.out.println("Nodo: " + nodo.getElem());
+            if(nivelActual >= nivMin && nivelActual <= nivMax){
+                lista.insertar(nodo.getElem(), lista.longitud()+1);
+            }
+            NodoGen hijo = nodo.getHijoIzquierdo();
+            if(nivelActual+1 <= nivMax){
+                while(hijo != null){
+                    listarEntreNivelesAux(hijo, nivelActual+1, nivMin, nivMax, lista);
+                    hijo = hijo.getHermanoDerecho();
+                }   
+            }
+        }
+    }
 }
