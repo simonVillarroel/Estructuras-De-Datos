@@ -307,46 +307,34 @@ public class ArbolBB {
             cadena += toStringAux(nodo.getDerecho());
         }
         return cadena;
-
     }
-
-    //////////EJERCICIOS ADICIONALES//////////
-
-    public Lista listarMayorIgual(Comparable elem){
-        Lista lista = new Lista();
-        listarMayorIgualAux(this.raiz, lista, elem);
-        return lista;
+    
+    public boolean eliminarMinimo(){
+        boolean exito = false;
+        if(this.raiz.getIzquierdo() != null){
+            exito = eliminarMinimoAux(this.raiz.getIzquierdo(), this.raiz);    
+        }else{
+            this.raiz = this.raiz.getDerecho();
+            exito = true;
+        }
+        
+        return exito;
     }
-
-    private void listarMayorIgualAux(NodoABB nodo, Lista lista, Comparable elem){
+    private boolean eliminarMinimoAux(NodoABB nodo, NodoABB nodoPadre){
+        boolean exito = false;
         if(nodo != null){
-            if(nodo.getElem().compareTo(elem) >= 0){
-                //nodo.elem es mayor a elem
-                listarMayorIgualAux(nodo.getIzquierdo(), lista, elem);
-                lista.insertar(nodo.getElem(), lista.longitud()+1);
-                listarMayorIgualAux(nodo.getDerecho(), lista, elem);
+            System.out.println("nodo: "+nodo.getElem());
+            if(nodo.getIzquierdo() != null){
+                exito = eliminarMinimoAux(nodo.getIzquierdo(), nodo);
             }else{
-                listarMayorIgualAux(nodo.getDerecho(), lista, elem);
+                if(nodo.getDerecho() == null){
+                    nodoPadre.setIzquierdo(null);
+                }else{
+                    nodoPadre.setIzquierdo(nodo.getDerecho());
+                }
+                exito = true;
             }
         }
-    }
-
-    public Lista listarMenores(Comparable elem){
-        Lista lista = new Lista();
-        listarMenoresAux(this.raiz, lista, elem);
-        return lista;
-    }
-
-    private void listarMenoresAux(NodoABB nodo, Lista lista, Comparable elem){
-        if(nodo != null){
-            if(nodo.getElem().compareTo(elem) < 0){
-                //nodo.elem es mayor a elem
-                listarMenoresAux(nodo.getIzquierdo(), lista, elem);
-                lista.insertar(nodo.getElem(), lista.longitud()+1);
-                listarMenoresAux(nodo.getDerecho(), lista, elem);
-            }else{
-                listarMenoresAux(nodo.getIzquierdo(), lista, elem);
-            }
-        }
+        return exito;
     }
 }
