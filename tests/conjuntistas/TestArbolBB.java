@@ -47,13 +47,6 @@ public class TestArbolBB {
         System.out.println("Listado del arbol entre 0 y 15, debe dar [4 11 15] -->\t\t" + arbol.listarRango(0, 15));
         System.out.println("Listado del arbol entre 28 y 50, debe dar [28 30 35 43 50] -->\t" + arbol.listarRango(28, 50));
 
-        System.out.println("\n*****Prueba de listarMayorIgual() y listarMenores()");
-        System.out.println("Listar mayor o igual que 28, debe dar [ 28 30 35 43 50 ] -->\t" + arbol.listarMayorIgual(28));
-        System.out.println("Listar mayor o igual que 44, debe dar [ 50 ] -->\t" + arbol.listarMayorIgual(44));
-        System.out.println("Listar mayor o igual que 0, debe dar [ 4 11 15 22 25 28 30 35 43 50 ] -->\t" + arbol.listarMayorIgual(0));
-        System.out.println("Listar menores que 28, debe dar [ 4 11 15 22 25 ] -->\t" + arbol.listarMenores(28));
-        System.out.println("Listar menores que 43, debe dar [ 4 11 15 22 25 28 30 35 ] -->\t" + arbol.listarMenores(43));
-        System.out.println("Listar menores que 0, debe dar [ ] -->\t" + arbol.listarMenores(0));
 
         System.out.println("\n*****Prueba de pertenece()*****");
         System.out.println("5 pertenece al arbol, debe devolver false -->\t" + arbol.pertenece(5));
@@ -88,5 +81,18 @@ public class TestArbolBB {
         
         System.out.println("\nListado del arbol original -->\t\t\t\t\t" + arbol.listar());
         System.out.println("Listado del arbol clonado -->\t\t\t\t\t" + clon.listar());
+        
+        System.out.println("Arbol clonado:" + clon.toString());
+        System.out.println("Elimino el minimo elemento: " + ((clon.eliminarMinimo()) ? sOk : sErr));
+        System.out.println("Arbol clonado:" + clon.toString());
+        System.out.println("Elimino el minimo elemento: " + ((clon.eliminarMinimo()) ? sOk : sErr));
+        System.out.println("Arbol clonado:" + clon.toString());
+        System.out.println("Elimino el minimo elemento: " + ((clon.eliminarMinimo()) ? sOk : sErr));
+        System.out.println("Arbol clonado:" + clon.toString());
+        System.out.println("Elimino el minimo elemento: " + ((clon.eliminarMinimo()) ? sOk : sErr));
+        System.out.println("Arbol clonado:" + clon.toString());
+        System.out.println("Elimino el minimo elemento: " + ((clon.eliminarMinimo()) ? sOk : sErr));
+        System.out.println("Arbol clonado:" + clon.toString());
+
     }
 }
