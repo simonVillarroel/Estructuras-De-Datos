@@ -2,19 +2,22 @@ package conjuntistas;
 
 public class NodoAVL {
     private Comparable elem;
-    private int altura;
-    private NodoAVL izquierdo;
+    private NodoAVL izquierdo; 
     private NodoAVL derecho;
-
+    private int altura;
+    
     public NodoAVL(Comparable elem){
         this.elem = elem;
+        this.izquierdo = null;
+        this.derecho = null;
+        this.altura = 0;
     }
-    
+
     public NodoAVL(Comparable elem, NodoAVL izq, NodoAVL der){
         this.elem = elem;
-        this.altura = 0;
         this.izquierdo = izq;
         this.derecho = der;
+        this.altura = 0;
     }
 
     public Comparable getElem() {
@@ -25,12 +28,28 @@ public class NodoAVL {
         this.elem = elem;
     }
 
+    public NodoAVL getIzquierdo() {
+        return izquierdo;
+    }
+
+    public void setIzquierdo(NodoAVL hijoIzquierdo) {
+        this.izquierdo = hijoIzquierdo;
+    }
+
+    public NodoAVL getDerecho() {
+        return derecho;
+    }
+
+    public void setDerecho(NodoAVL hijoDerecho) {
+        this.derecho = hijoDerecho;
+    }
+
     public int getAltura() {
         return altura;
     }
 
     public void recalcularAltura() {
-        int[] altura = {-1};
+        int[] altura = {0};
         recalcularAlturaAux(this, altura, 0);
         this.altura = altura[0];
     }
@@ -44,22 +63,5 @@ public class NodoAVL {
             recalcularAlturaAux(nodo.getDerecho(), alturaMax, alturaActual + 1);
         }
     }
-
-    public NodoAVL getIzquierdo() {
-        return izquierdo;
-    }
-
-    public void setIzquierdo(NodoAVL izquierdo) {
-        this.izquierdo = izquierdo;
-    }
-
-    public NodoAVL getDerecho() {
-        return derecho;
-    }
-
-    public void setDerecho(NodoAVL derecho) {
-        this.derecho = derecho;
-    }
-    
     
 }
