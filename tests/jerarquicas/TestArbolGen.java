@@ -171,12 +171,5 @@ public class TestArbolGen {
         System.out.println("Verifico camino [ a d k l t ], devuelve OK!: " + ((arbol.verificarCaminoHastaNodo(camino2)) ? sOk : sErr));
         System.out.println("Verifico camino [ a m n o t ], devuelve ERROR: " + ((arbol.verificarCaminoHastaNodo(camino3)) ? sOk : sErr));
         System.out.println("Verifico camino [ a d ], devuelve OK!: " + ((arbol.verificarCaminoHastaNodo(camino4)) ? sOk : sErr));
-
-
-        arbol.insertar('n', 'h');        arbol.insertar('m', 'h');
-        arbol.insertar('o', 'n');
-
-        System.out.println("Arbol:\n" + arbol.toString());
-        System.out.println("Listado entre niveles 1 y 2, deberia dar [ b e f g c h d i j k ] -->\t" + arbol.listarEntreNiveles(1, 2));
     }
 }

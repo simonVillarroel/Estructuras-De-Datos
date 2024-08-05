@@ -20,21 +20,6 @@ public class ArbolBin {
         return exito[0];
     }
 
-    private void verificarPatronAux(NodoArbol nodo, Lista patron, int ubicacion, boolean[] exito){
-        if(nodo != null){
-            if(nodo.getElem().equals(patron.recuperar(ubicacion))){
-                if(nodo.getIzquierdo() == null && nodo.getDerecho() == null && patron.recuperar(ubicacion+1) == null){
-                    exito[0] = true;
-                }else{
-                    verificarPatronAux(nodo.getIzquierdo(), patron, ubicacion+1, exito);
-                    if(!exito[0]){
-                        verificarPatronAux(nodo.getDerecho(), patron, ubicacion+1, exito);
-                    }
-                }
-            }
-        }
-    }
-    
     //EJERCICIO TIPO 3 (f)
     public Lista frontera() {
         Lista frontera = new Lista();
@@ -77,6 +62,20 @@ public class ArbolBin {
     }
 
 
+    private void verificarPatronAux(NodoArbol nodo, Lista patron, int ubicacion, boolean[] exito){
+        if(nodo != null){
+            if(nodo.getElem().equals(patron.recuperar(ubicacion))){
+                if(nodo.getIzquierdo() == null && nodo.getDerecho() == null && patron.recuperar(ubicacion+1) == null){
+                    exito[0] = true;
+                }else{
+                    verificarPatronAux(nodo.getIzquierdo(), patron, ubicacion+1, exito);
+                    if(!exito[0]){
+                        verificarPatronAux(nodo.getDerecho(), patron, ubicacion+1, exito);
+                    }
+                }
+            }
+        }
+    }
 
     public boolean insertar(Object nuevoElem, Object elemPadre, char lugar) {
         boolean exito = true;

@@ -402,25 +402,46 @@ public class ArbolGen {
         return exito;
     }
 
-    public Lista listarEntreNiveles(int nivMin, int nivMax){
-        Lista lista = new Lista();
-        listarEntreNivelesAux(this.raiz, 0, nivMin, nivMax, lista);
-        return lista;
-    }
-    
-    private void listarEntreNivelesAux(NodoGen nodo, int nivelActual, int nivMin, int nivMax, Lista lista){
-        if(nodo != null){
-            System.out.println("Nodo: " + nodo.getElem());
-            if(nivelActual >= nivMin && nivelActual <= nivMax){
-                lista.insertar(nodo.getElem(), lista.longitud()+1);
-            }
-            NodoGen hijo = nodo.getHijoIzquierdo();
-            if(nivelActual+1 <= nivMax){
-                while(hijo != null){
-                    listarEntreNivelesAux(hijo, nivelActual+1, nivMin, nivMax, lista);
-                    hijo = hijo.getHermanoDerecho();
-                }   
+    //////////////////
+
+    public boolean jerarquizar(Object elem){
+        boolean exito = false;
+        boolean[] aux = {false};
+        if(pertenece(elem) && nivel(elem) > 1){
+            Object elemP = padre(elem);
+            NodoGen nodo = obtenerNodo(elemP, this.raiz, aux);
+            if(nodo != null){
+                exito = jerarquizarA(elem, nodo);
             }
         }
+        return exito;
+    }
+
+    private boolean jerarquizarA(Object elem, NodoGen nodo){
+        boolean enc = false;
+        NodoGen nuevo = null;
+        NodoGen hermanoAnterior = null;
+        NodoGen hijo = nodo.getHijoIzquierdo();
+        while(!enc && hijo != null){
+            if(hijo.getElem().equals(elem)){
+                enc = true;
+                nuevo = hijo;
+                if(hijo.equals(nodo.getHijoIzquierdo())){
+                    //si el nodo a eliminar es el primero de los hermanos
+                    nodo.setHijoIzquierdo(nodo.getHijoIzquierdo().getHermanoDerecho());
+                }else{
+                    //si el nodo a eliminar es cualquiera de los siguientes hermanos
+                    hermanoAnterior.setHermanoDerecho(hijo.getHermanoDerecho());
+                }
+            }else{
+                hermanoAnterior = hijo;
+                hijo = hijo.getHermanoDerecho();
+            }
+        }
+        if(enc){
+            nuevo.setHermanoDerecho(nodo.getHermanoDerecho());
+            nodo.setHermanoDerecho(nuevo);
+        }
+        return enc;
     }
 }

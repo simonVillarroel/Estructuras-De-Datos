@@ -1,13 +1,45 @@
 package tests.conjuntistas;
 
-import conjuntistas.ArbolBB;
+import conjuntistas.ArbolAVL;
 
-public class TestArbolBB {
+public class TestArbolAVL {
     static String sOk = "OK!", sErr = "ERROR";
 
     public static void main(String[] args){
-        ArbolBB arbol = new ArbolBB();
-        ArbolBB clon;
+        ArbolAVL arbol = new ArbolAVL();
+        ArbolAVL clon;
+        
+        /*
+        System.out.println("Inserto el nro 29\t-->" + (arbol.insertar(29) ? sOk : sErr));
+        System.out.println(arbol.toString());
+        System.out.println("Inserto el nro 94\t-->" + (arbol.insertar(94) ? sOk : sErr));
+        System.out.println(arbol.toString());
+        System.out.println("Inserto el nro 62\t-->" + (arbol.insertar(62) ? sOk : sErr));
+        System.out.println(arbol.toString());
+        System.out.println("Inserto el nro 35\t-->" + (arbol.insertar(35) ? sOk : sErr));
+        System.out.println(arbol.toString());
+        System.out.println("Inserto el nro 26\t-->" + (arbol.insertar(26) ? sOk : sErr));
+        System.out.println(arbol.toString());
+        System.out.println("Inserto el nro 11\t-->" + (arbol.insertar(11) ? sOk : sErr));
+        System.out.println(arbol.toString());
+        System.out.println("Inserto el nro 5\t-->" + (arbol.insertar(5) ? sOk : sErr));
+        System.out.println(arbol.toString());
+        System.out.println("Inserto el nro 1\t-->" + (arbol.insertar(1) ? sOk : sErr));
+        System.out.println(arbol.toString());
+        System.out.println("Elimino el nro 26\t-->" + (arbol.eliminar(26) ? sOk : sErr));
+        System.out.println(arbol.toString());
+        System.out.println("Elimino el nro 29 (raiz)\t-->" + (arbol.eliminar(29) ? sOk : sErr));
+        System.out.println(arbol.toString());
+        System.out.println("Elimino el nro 62\t-->" + (arbol.eliminar(62) ? sOk : sErr));
+        System.out.println(arbol.toString());
+        System.out.println("Elimino el nro 94\t-->" + (arbol.eliminar(94) ? sOk : sErr));
+        System.out.println(arbol.toString());
+        System.out.println("Elimino el nro 1\t-->" + (arbol.eliminar(1) ? sOk : sErr));
+        System.out.println(arbol.toString());
+        */
+
+
+
         
         System.out.println("Inserto el nro 25: " + arbol.insertar(25));
         System.out.println(arbol.toString());
@@ -33,13 +65,14 @@ public class TestArbolBB {
         System.out.println("Minimo elemento del arbol debe devolver 4 -->\t" + arbol.minimoElem());
         System.out.println("Maximo elemento del arbol debe devolver 50 -->\t" + arbol.maximoElem());
 
-        //      _____25_____
-        //     /            \
-        //   _11_          _43_
-        //  /    \        /    \
-        // 4    _22     _30_    50
-        //     /       /    \
-        //    15      28    35
+        //Deberia quedar:
+        //        _____25_____
+        //       /            \
+        //     _15_          _43_
+        //    /    \        /    \
+        //  11     22     _30_    50
+        //  /            /    \
+        // 4            28    35
 
         System.out.println("\nArbol original:\n" + arbol.toString());
         System.out.println("Listado del arbol original -->\t\t\t\t\t" + arbol.listar());
@@ -47,13 +80,6 @@ public class TestArbolBB {
         System.out.println("Listado del arbol entre 0 y 15, debe dar [4 11 15] -->\t\t" + arbol.listarRango(0, 15));
         System.out.println("Listado del arbol entre 28 y 50, debe dar [28 30 35 43 50] -->\t" + arbol.listarRango(28, 50));
 
-        System.out.println("\n*****Prueba de listarMayorIgual() y listarMenores()");
-        System.out.println("Listar mayor o igual que 28, debe dar [ 28 30 35 43 50 ] -->\t" + arbol.listarMayorIgual(28));
-        System.out.println("Listar mayor o igual que 44, debe dar [ 50 ] -->\t" + arbol.listarMayorIgual(44));
-        System.out.println("Listar mayor o igual que 0, debe dar [ 4 11 15 22 25 28 30 35 43 50 ] -->\t" + arbol.listarMayorIgual(0));
-        System.out.println("Listar menores que 28, debe dar [ 4 11 15 22 25 ] -->\t" + arbol.listarMenores(28));
-        System.out.println("Listar menores que 43, debe dar [ 4 11 15 22 25 28 30 35 ] -->\t" + arbol.listarMenores(43));
-        System.out.println("Listar menores que 0, debe dar [ ] -->\t" + arbol.listarMenores(0));
 
         System.out.println("\n*****Prueba de pertenece()*****");
         System.out.println("5 pertenece al arbol, debe devolver false -->\t" + arbol.pertenece(5));
@@ -72,21 +98,18 @@ public class TestArbolBB {
 
 
         System.out.println("\n*****Prueba de metodo eliminar() en arbol original*****");
-        System.out.println("Elimino al nro 25 (raiz, caso 1) -->\t" + (arbol.eliminar(25) ? sOk : sErr));
+        System.out.println("Elimino al nro 25 -->\t" + (arbol.eliminar(25) ? sOk : sErr));
         System.out.println(arbol.toString());
-        System.out.println("Elimino al nro 35 (caso 1) -->\t" + (arbol.eliminar(35) ? sOk : sErr));
+        System.out.println("Elimino al nro 50 -->\t" + (arbol.eliminar(50) ? sOk : sErr));
         System.out.println(arbol.toString());
-        System.out.println("Elimino al nro 30 (caso 2) -->\t" + (arbol.eliminar(30) ? sOk : sErr));
+        System.out.println("Elimino al nro 35 -->\t" + (arbol.eliminar(35) ? sOk : sErr));
         System.out.println(arbol.toString());
-        System.out.println("Listado del arbol original -->\t\t\t\t\t" + arbol.listar());
-        
-        System.out.println("\n*****Prueba de listarRango()*****");
-        System.out.println("Listado del arbol entre 20 y 40, debe dar [22 28] -->\t\t" + arbol.listarRango(20, 40));
-        System.out.println("Listado del arbol entre 0 y 35, debe dar [4 11 15 22 28] -->\t" + arbol.listarRango(0, 35));
-        System.out.println("Listado del arbol entre 28 y 50, debe dar [28 43 50] -->\t" + arbol.listarRango(28, 50));
- 
+        System.out.println("Elimino al nro 22 -->\t" + (arbol.eliminar(22) ? sOk : sErr));
+        System.out.println(arbol.toString());
         
         System.out.println("\nListado del arbol original -->\t\t\t\t\t" + arbol.listar());
         System.out.println("Listado del arbol clonado -->\t\t\t\t\t" + clon.listar());
+        
+
     }
 }

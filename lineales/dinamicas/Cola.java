@@ -71,14 +71,17 @@ public class Cola {
     }
 
     public String toString(){
-        String text = "[";
+        String text = "[ ";
         if (this.frente == null) {
             text = text + "La cola esta vacia";
         } else {
             Nodo aux = this.frente;
             while (aux != null) {
-                text += " " + String.valueOf(aux.getElem());
+                text += String.valueOf(aux.getElem());
                 aux = aux.getEnlace();
+                if(aux != null){
+                    text += ", ";
+                }
             }
         }
         return text + " ]";

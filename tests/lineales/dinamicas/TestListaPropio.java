@@ -79,4 +79,5 @@ public class TestListaPropio {
         System.out.println("Pertenece 100 a la lista? Espera FALSE: \t\t\t" + ((l2.pertenece(100) == false) ? sOk : sErr));
         System.out.println("\t--> " + l2.toString());
     }
+
 }

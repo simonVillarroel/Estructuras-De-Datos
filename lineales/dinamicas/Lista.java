@@ -155,6 +155,7 @@ public class Lista {
         if (aux != null) {
             clon.cabecera = clonarNodo(aux); 
         }
+        clon.longitud = this.longitud;
         return clon;
     }
     private Nodo clonarNodo(Nodo nodoActual){
@@ -172,11 +173,13 @@ public class Lista {
         } else {
             Nodo aux = this.cabecera;
             while (aux != null) {
-                text += aux.getElem().toString() + " ";
+                text += aux.getElem().toString();
                 aux = aux.getEnlace();
-                
+                if (aux != null) {
+                    text += ", ";
+                }
             }
         }
-        return text + "]";
+        return text + " ]";
     }
 }

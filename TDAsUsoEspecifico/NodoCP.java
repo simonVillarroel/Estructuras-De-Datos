@@ -26,6 +26,4 @@ public class NodoCP {
     public void setItems(Cola items) {
         this.items = items;
     }
-
-    
 }

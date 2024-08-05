@@ -91,7 +91,7 @@ public class Grafo_Etiquetado{
         return encontrado;
     }
 
-    public boolean insertarArco(Object origen, Object destino, Object etiqueta){
+    public boolean insertarArco(Object origen, Object destino, Double etiqueta){
         boolean exito = false;
         NodoVert verticeOrigen = ubicarVertice(origen);
         NodoVert verticeDestino = ubicarVertice(destino);
@@ -352,5 +352,40 @@ public class Grafo_Etiquetado{
             auxAdy = auxAdy.getSigAdyacente();
         }
         return cadenaAdys;
+    }
+
+
+    ////
+    public Lista caminoMasCortoEnTiempo(Object origen, Object destino, Double[] tiempo) {
+        Lista caminoMasCorto = new Lista();
+        NodoVert nodoOrigen = ubicarVertice(origen);
+        NodoVert nodoDestino = ubicarVertice(destino);
+        if (nodoOrigen != null && nodoDestino != null) {
+            Lista visitados = new Lista();
+            Lista caminoActual = new Lista();
+            caminoMasCorto = encontrarCaminoMenosCostoso(nodoOrigen, nodoDestino, visitados, caminoActual, caminoMasCorto, tiempo, 0.);            
+        }
+        return caminoMasCorto;
+    }
+
+    private Lista encontrarCaminoMenosCostoso(NodoVert nodoActual, NodoVert nodoDestino, Lista visitados,
+                                         Lista caminoActual, Lista mejorCamino, Double[] tiempo, Double tiempoActual) {
+        visitados.insertar(nodoActual, visitados.longitud()+1);
+        caminoActual.insertar(nodoActual.getElem(), caminoActual.longitud()+1);
+            if (nodoActual.equals(nodoDestino) && (tiempoActual < tiempo[0] || mejorCamino.esVacia())) {
+                mejorCamino = caminoActual.clone();
+                tiempo[0] = tiempoActual;
+            }else{
+                NodoAdy vecino = nodoActual.getPrimerAdyacente();
+                while (vecino != null) {
+                    if (visitados.localizar(vecino.getVertice()) < 0) {
+                        mejorCamino = encontrarCaminoMenosCostoso(vecino.getVertice(), nodoDestino, visitados, caminoActual, mejorCamino, tiempo, tiempoActual + vecino.getEtiqueta());
+                    }
+                    vecino = vecino.getSigAdyacente();
+                }
+            }
+        visitados.eliminar(visitados.localizar(nodoActual));
+        caminoActual.eliminar(caminoActual.longitud());
+        return mejorCamino;
     }
 }

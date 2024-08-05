@@ -75,11 +75,11 @@ public class ArbolAVL {
             balanceHijo = calcularBalance(nodo.getIzquierdo());
             if(balanceHijo == -1){
                 //rotacionDobleIzqDer
-                System.out.println("Rotacion doble izquierda-derecha con pivot: " + nodo.getElem() + " y h: " + nodo.getIzquierdo().getElem());
+                //System.out.println("Rotacion doble izquierda-derecha con pivot: " + nodo.getElem() + " y h: " + nodo.getIzquierdo().getElem());
                 nodo.setIzquierdo(rotarIzquierda(nodo.getIzquierdo()));
                 nodo = rotarDerecha(nodo);
             }else{
-                System.out.println("Rotacion simple derecha con pivot " + nodo.getElem());
+                //System.out.println("Rotacion simple derecha con pivot " + nodo.getElem());
                 nodo = rotarDerecha(nodo);
             }
         }
@@ -88,11 +88,11 @@ public class ArbolAVL {
             balanceHijo = calcularBalance(nodo.getDerecho());
             if(balanceHijo == 1){
                 //rotacionDobleDerIzq
-                System.out.println("Rotacion doble derecha-izquierda con pivot: " + nodo.getElem() + " y h: " + nodo.getDerecho().getElem());
+                //System.out.println("Rotacion doble derecha-izquierda con pivot: " + nodo.getElem() + " y h: " + nodo.getDerecho().getElem());
                 nodo.setDerecho(rotarDerecha(nodo.getDerecho()));
                 nodo = rotarIzquierda(nodo);
             }else{
-                System.out.println("Rotacion simple izquierda con pivot " + nodo.getElem());
+                //System.out.println("Rotacion simple izquierda con pivot " + nodo.getElem());
                 nodo = rotarIzquierda(nodo);
             }
         }
@@ -120,7 +120,6 @@ public class ArbolAVL {
         temp = hijo.getIzquierdo();
         hijo.setIzquierdo(pivot);
         pivot.setDerecho(temp);
-        System.out.println("retorno nodo " + hijo.getElem());
         return hijo;
     }
     
@@ -197,24 +196,12 @@ public class ArbolAVL {
 
     private NodoAVL eliminarCaso2(NodoAVL nodoActual, NodoAVL nodoPadre){
         NodoAVL aux;
-        if(nodoActual.getElem().compareTo(nodoPadre.getElem()) < 0){
-            //el nodo a eliminar es HI de nodoPadre
-            if(nodoActual.getIzquierdo() != null){
-                //el HI de nodoActual pasa a ser HI de nodoPadre
-                aux = nodoActual.getIzquierdo();
-            }else{
-                //el HD de nodoActual pasa a ser HI de nodoPadre
-                aux = nodoActual.getDerecho();
-            }
+        if(nodoActual.getIzquierdo() != null){
+            //el HI de nodoActual pasa a ser HI de nodoPadre
+            aux = nodoActual.getIzquierdo();
         }else{
-            //el nodo a eliminar es HD de nodoPadre
-            if(nodoActual.getIzquierdo() != null){
-                //el HI de nodoActual pasa a ser HD de nodoPadre
-                aux = nodoActual.getIzquierdo();
-            }else{
-                //el HD de nodoActual pasa a ser HD de nodoPadre
-                aux = nodoActual.getDerecho();
-            }
+            //el HD de nodoActual pasa a ser HI de nodoPadre
+            aux = nodoActual.getDerecho();
         }
         return aux;
     }
@@ -288,7 +275,6 @@ public class ArbolAVL {
 
     private void listarRangoAux(NodoAVL nodo, Lista lista, Comparable min, Comparable max){
         if(nodo != null){
-            System.out.println("entre con nodo " + nodo.getElem());
             int mayorQueMinimo = nodo.getElem().compareTo(min);
             int menorQueMaximo = nodo.getElem().compareTo(max);
             
